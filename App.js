@@ -1,23 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import DeckList from './src/components/DeckList';
+import { Constants } from 'expo';
+
+const CustomStatusBar = () => (
+  <View style={styles.statusBar}>
+    <StatusBar traslucent />
+  </View>
+);
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <CustomStatusBar />
+        <DeckList />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  statusBar: {
+    backgroundColor: 'black',
+    height: Constants.statusBarHeight
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
