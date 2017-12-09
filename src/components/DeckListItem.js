@@ -11,7 +11,7 @@ const DeckListItem = ({ deck, cardsNumber }) => (
   </TouchableOpacity>
 );
 
-// TODO: make list items take all available space. => wrap into a View
+// TODO: make list items take all available space. => remove justifyContent
 const styles = StyleSheet.create({
   listItem: {
     borderStyle: 'solid',
