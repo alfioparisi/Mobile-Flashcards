@@ -11,12 +11,12 @@ const DeckListItem = ({ deck, cardsNumber }) => (
   </TouchableOpacity>
 );
 
+// TODO: make list items take all available space. => wrap into a View
 const styles = StyleSheet.create({
   listItem: {
     borderStyle: 'solid',
     borderColor: 'red',
     borderWidth: 3,
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
