@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import DeckList from './src/components/DeckList';
 import Deck from './src/components/Deck';
 import AddQuestion from './src/components/AddQuestion';
-import Back from './src/components/Back';
+import End from './src/components/End';
 // import Quiz from './src/components/Quiz';
 import { Constants } from 'expo';
 
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <CustomStatusBar />
-        <Back />
+        <End />
       </View>
     );
   }
