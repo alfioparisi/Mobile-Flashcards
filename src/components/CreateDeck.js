@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
+import { createDeck } from '../actions/decks';
+
+import store from '../store';
 
 class CreateDeck extends Component {
   constructor(props) {
@@ -11,9 +14,20 @@ class CreateDeck extends Component {
     };
   }
 
-  render() {
+  createDeck = () => {
     const { deckName } = this.state;
     const { navigation } = this.props;
+    // dispatch action
+    store.dispatch(createDeck(deckName));
+
+    // save deck to AsyncStorage
+
+    // go back to deck view
+    navigation.dispatch(NavigationActions.back())
+  }
+
+  render() {
+    const { deckName } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
         <View style={styles.body}>
@@ -29,7 +43,7 @@ class CreateDeck extends Component {
         <View style={styles.btnContainer}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.dispatch(NavigationActions.back())}
+            onPress={() => this.createDeck()}
           >
             <Text style={styles.btnText}>Create</Text>
           </TouchableOpacity>

@@ -7,6 +7,8 @@ import AddQuestion from './src/components/AddQuestion';
 import Quiz from './src/components/Quiz';
 import { StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 const CustomStatusBar = () => (
   <View style={styles.statusBar}>
@@ -47,10 +49,12 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <CustomStatusBar />
-        <MainNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <CustomStatusBar />
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }

@@ -15,7 +15,7 @@ class DeckList extends Component {
   }
 
   componentDidMount() {
-    // get the initial decks (eventually from AsyncStorage)
+    // Get the initial decks (eventually from AsyncStorage)
     const decks = store.getState().decks;
     // Format the data because FlatList wants an array of objects with a 'key' property.
     const listData = Object.keys(decks).map(item => ({key: item}));
