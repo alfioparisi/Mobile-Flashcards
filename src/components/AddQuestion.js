@@ -1,45 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const AddQuestion = () => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <TouchableOpacity
-        onPress={() => alert('Go back to deck view.')}
-      >
-        <MaterialIcons name='keyboard-arrow-left' size={50} />
-      </TouchableOpacity>
-      <Text style={styles.headerText}>Add a new question</Text>
-    </View>
-    <KeyboardAvoidingView style={styles.form} behavior='padding'>
-      <View style={styles.formBody}>
-        <View style={styles.label}>
-          <Text>Question</Text>
-          <TextInput
-            style={styles.textInput}
-            value='Some text.'
-          />
+class AddQuestion extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      question: 'Mh?',
+      answer: 'Ah!'
+    };
+  }
+
+  render() {
+    const { question, answer } = this.state;
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => alert('Go back to deck view.')}
+          >
+            <MaterialIcons name='keyboard-arrow-left' size={50} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Add a new question</Text>
         </View>
-        <View style={styles.label}>
-          <Text>Answer</Text>
-          <TextInput
-            style={styles.textInput}
-            value='Some text.'
-          />
-        </View>
+        <KeyboardAvoidingView style={styles.form} behavior='padding'>
+          <View style={styles.formBody}>
+            <View style={styles.label}>
+              <Text>Question</Text>
+              <TextInput
+                style={styles.textInput}
+                value={question}
+                onChangeText={text => this.setState({question: text})}
+              />
+            </View>
+            <View style={styles.label}>
+              <Text>Answer</Text>
+              <TextInput
+                style={styles.textInput}
+                value={answer}
+                onChangeText={text => this.setState({answer: text})}
+              />
+            </View>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => alert('Add a question.')}
+            >
+              <Text style={styles.btnText}>Add</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => alert('Add a question.')}
-        >
-          <Text style={styles.btnText}>Add</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -81,7 +96,8 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   textInput: {
-    fontSize: 16
+    fontSize: 16,
+    padding: 5
   },
   btnContainer: {
     borderStyle: 'solid',

@@ -18,10 +18,13 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 3,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 70
   },
   itemText: {
-    flex: 1
+    flex: 1,
+    textAlign: 'center'
   }
 });
 

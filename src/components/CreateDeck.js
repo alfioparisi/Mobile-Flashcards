@@ -1,38 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const CreateDeck = () => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <TouchableOpacity
-        onPress={() => alert('Go back to deck view.')}
-      >
-        <MaterialIcons name='keyboard-arrow-left' size={50} />
-      </TouchableOpacity>
-      <Text style={styles.headerText}>Create a new deck</Text>
-    </View>
-    <KeyboardAvoidingView style={styles.form} behavior='padding'>
-      <View style={styles.formBody}>
-        <View style={styles.label}>
-          <Text>Choose a name</Text>
-          <TextInput
-            style={styles.textInput}
-            value='Some text.'
-          />
+class CreateDeck extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deckName: 'Zabaglione'
+    };
+  }
+
+  render() {
+    const { deckName } = this.state;
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => alert('Go back to deck view.')}
+          >
+            <MaterialIcons name='keyboard-arrow-left' size={50} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Create a new deck</Text>
         </View>
+        <KeyboardAvoidingView style={styles.form} behavior='padding'>
+          <View style={styles.formBody}>
+            <View style={styles.label}>
+              <Text>Choose a name</Text>
+              <TextInput
+                style={styles.textInput}
+                value={deckName}
+                onChangeText={text => this.setState({deckName: text})}
+              />
+            </View>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => alert('Create a new deck.')}
+            >
+              <Text style={styles.btnText}>Create</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => alert('Create a new deck.')}
-        >
-          <Text style={styles.btnText}>Create</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -74,7 +87,8 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   textInput: {
-    fontSize: 16
+    fontSize: 16,
+    padding: 5
   },
   btnContainer: {
     borderStyle: 'solid',

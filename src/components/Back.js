@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Switch, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Back = () => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <Text style={styles.headerText}>1 of x</Text>
-    </View>
-    <View style={styles.body}>
-      <View style={styles.answerContainer}>
-        <Text style={styles.answer}>Answer.</Text>
+class Back extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      correct: false
+    };
+  }
+
+  render() {
+    const { correct } = this.state;
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>1 of x</Text>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.answerContainer}>
+            <Text style={styles.answer}>Answer.</Text>
+          </View>
+          <View style={styles.guess}>
+            <Text>Switch on if correct</Text>
+            <Switch
+              value={correct}
+              onValueChange={correct => this.setState({correct})}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.nextBtn}
+            onPress={() => alert('Go to next question.')}
+          >
+            <Text>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.guess}>
-        <Text>Switch on if correct</Text>
-        <Switch
-          onValueChange={() => {}}
-        />
-      </View>
-      <TouchableOpacity
-        style={styles.nextBtn}
-        onPress={() => alert('Go to next question.')}
-      >
-        <Text>Next</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <CustomStatusBar />
-        <CreateDeck />
+        <Quiz />
       </View>
     );
   }
