@@ -8,7 +8,7 @@ class Deck extends Component {
   }
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.entryId
+    title: navigation.state.params.deck
   })
 
   render() {
@@ -30,7 +30,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => navigation.navigate('AddQuestion')}
+              onPress={() => navigation.navigate('AddQuestion', {deck: navigation.state.params.deck})}
             >
               <Text style={styles.btnText}>Add a card</Text>
             </TouchableOpacity>

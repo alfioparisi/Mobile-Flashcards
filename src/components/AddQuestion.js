@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
+import { addQuestion } from '../actions/decks';
+import { connect } from 'react-redux';
 
 class AddQuestion extends Component {
   constructor(props) {
@@ -12,9 +14,15 @@ class AddQuestion extends Component {
     };
   }
 
+  addQuestion = () => {
+    const { question, answer } = this.state;
+    const { dispatch, navigation } = this.props;
+    dispatch(addQuestion(navigation.state.params.deck, question, answer));
+    navigation.dispatch(NavigationActions.back())
+  }
+
   render() {
     const { question, answer } = this.state;
-    const { navigation } = this.props;
     return (
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
         <View style={styles.body}>
@@ -38,7 +46,7 @@ class AddQuestion extends Component {
         <View style={styles.btnContainer}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.dispatch(NavigationActions.back())}
+            onPress={() => this.addQuestion()}
           >
             <Text style={styles.btnText}>Add</Text>
           </TouchableOpacity>
@@ -92,4 +100,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddQuestion;
+export default connect()(AddQuestion);

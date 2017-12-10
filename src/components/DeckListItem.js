@@ -4,6 +4,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 const openDeck = (navigation, deck, cardsNumber) => {
   return navigation.navigate('Deck', {
     entryId: deck,
+    deck,
     cardsNumber
   });
 };
