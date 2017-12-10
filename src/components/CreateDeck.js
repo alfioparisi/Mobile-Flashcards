@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions, Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDeck } from '../actions/decks';
+import { connect } from 'react-redux';
 
 import store from '../store';
 
@@ -26,6 +27,26 @@ class CreateDeck extends Component {
     navigation.dispatch(NavigationActions.back())
   }
 
+  checkAvailableName = () => {
+    const { deckName } = this.state;
+    const { decks } = this.props;
+    if (decks[deckName]) {
+      Alert.alert(
+        'Warning',
+        'A deck with the provided name is already present. Click OK to replace it.',
+        [
+          {text: 'Cancel', onPress: () => {}},
+          {text: 'OK', onPress: () => this.createDeck()}
+        ],
+        {
+          onDismiss: () => {}
+        }
+      );
+      return;
+    }
+    return this.createDeck();
+  }
+
   render() {
     const { deckName } = this.state;
     return (
@@ -43,7 +64,7 @@ class CreateDeck extends Component {
         <View style={styles.btnContainer}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => this.createDeck()}
+            onPress={() => this.checkAvailableName()}
           >
             <Text style={styles.btnText}>Create</Text>
           </TouchableOpacity>
@@ -97,4 +118,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CreateDeck;
+const mapStateToProps = state => ({
+  decks: state.decks
+});
+
+export default connect(mapStateToProps)(CreateDeck);
