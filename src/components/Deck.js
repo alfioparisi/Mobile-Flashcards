@@ -22,7 +22,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => alert('Start quiz.')}
+              onPress={() => navigation.navigate('Quiz')}
             >
               <Text style={styles.btnText}>Start quiz</Text>
             </TouchableOpacity>
@@ -30,7 +30,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => alert('Add a card.')}
+              onPress={() => navigation.navigate('AddQuestion')}
             >
               <Text style={styles.btnText}>Add a card</Text>
             </TouchableOpacity>
