@@ -1,40 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Deck = () => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <TouchableOpacity
-        onPress={() => alert('Go back to deck list.')}
-      >
-        <MaterialIcons name='keyboard-arrow-left' size={50} />
-      </TouchableOpacity>
-      <Text style={styles.headerText}>Deck Header</Text>
-    </View>
-    <View style={styles.subHeader}>
-      <Text>cards number here</Text>
-    </View>
-    <View style={styles.body}>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => alert('Start quiz.')}
-        >
-          <Text style={styles.btnText}>Start quiz</Text>
-        </TouchableOpacity>
+class Deck extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.entryId
+  })
+
+  render() {
+    const { navigation } = this.props;
+    return (
+      <View style={styles.container}>
+        <View style={styles.subHeader}>
+          <Text>This deck contains {navigation.state.params.cardsNumber} cards</Text>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => alert('Start quiz.')}
+            >
+              <Text style={styles.btnText}>Start quiz</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => alert('Add a card.')}
+            >
+              <Text style={styles.btnText}>Add a card</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => alert('Add a card.')}
-        >
-          <Text style={styles.btnText}>Add a card</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -42,21 +47,6 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 3,
     flex: 1
-  },
-  header: {
-    borderStyle: 'solid',
-    borderColor: 'blue',
-    borderWidth: 3,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  headerText: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18
   },
   subHeader: {
     borderStyle: 'solid',

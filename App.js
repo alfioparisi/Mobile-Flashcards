@@ -5,6 +5,7 @@ import Deck from './src/components/Deck';
 import CreateDeck from './src/components/CreateDeck';
 import AddQuestion from './src/components/AddQuestion';
 import Quiz from './src/components/Quiz';
+import { StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 
 const CustomStatusBar = () => (
@@ -13,12 +14,42 @@ const CustomStatusBar = () => (
   </View>
 );
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: DeckList,
+    navigationOptions: {
+      title: 'Home'
+    }
+  },
+  Deck: {
+    screen: Deck
+  },
+  CreateDeck: {
+    screen: CreateDeck,
+    navigationOptions: {
+      title: 'Create a new Deck'
+    }
+  },
+  AddQuestion: {
+    screen: AddQuestion,
+    navigationOptions: {
+      title: 'Add Question'
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz'
+    }
+  }
+});
+
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <CustomStatusBar />
-        <Quiz />
+        <MainNavigator />
       </View>
     );
   }

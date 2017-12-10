@@ -1,10 +1,17 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const DeckListItem = ({ deck, cardsNumber }) => (
+const openDeck = (navigation, deck, cardsNumber) => {
+  return navigation.navigate('Deck', {
+    entryId: deck,
+    cardsNumber
+  });
+};
+
+const DeckListItem = ({ deck, cardsNumber, navigation }) => (
   <TouchableOpacity
     style={styles.listItem}
-    onPress={() => alert(`Pressed Deck ${deck}.`)}
+    onPress={() => openDeck(navigation, deck, cardsNumber)}
   >
     <Text style={styles.itemText}>{deck}</Text>
     <Text style={styles.itemText}>{cardsNumber} cards</Text>

@@ -32,7 +32,7 @@ const data = {
 // Format the data because FlatList wants an array of objects with a 'key' property.
 const listData = Object.keys(data).map(item => ({key: item}));
 
-const DeckList = () => (
+const DeckList = ({ navigation }) => (
   <View style={styles.container}>
     <MainHeader />
     <FlatList
@@ -42,12 +42,13 @@ const DeckList = () => (
         <DeckListItem
           deck={item.key}
           cardsNumber={data[item.key].questions.length}
+          navigation={navigation}
         />
       )}
     />
     <TouchableOpacity
       style={styles.addBtn}
-      onPress={() => alert('Add a new deck.')}
+      onPress={() => navigation.navigate('CreateDeck')}
     >
       <Feather name='plus-circle' size={50} color='green' />
     </TouchableOpacity>
