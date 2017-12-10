@@ -1,59 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import MainHeader from './MainHeader';
 import DeckListItem from './DeckListItem';
 import { Feather } from '@expo/vector-icons';
 
-const data = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
+import store from '../store';
+
+class DeckList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      decks: []
+    }
   }
-};
 
-// Format the data because FlatList wants an array of objects with a 'key' property.
-const listData = Object.keys(data).map(item => ({key: item}));
+  componentDidMount() {
+    // get the initial decks (eventually from AsyncStorage)
+    const decks = store.getState().decks;
+    // Format the data because FlatList wants an array of objects with a 'key' property.
+    const listData = Object.keys(decks).map(item => ({key: item}));
+    return this.setState({
+      decks: listData
+    })
+  }
 
-const DeckList = ({ navigation }) => (
-  <View style={styles.container}>
-    <MainHeader />
-    <FlatList
-      contentContainerStyle={styles.deckList}
-      data={listData}
-      renderItem={({ item }) => (
-        <DeckListItem
-          deck={item.key}
-          cardsNumber={data[item.key].questions.length}
-          navigation={navigation}
+  render() {
+    const { decks } = this.state;
+    const { navigation } = this.props;
+    return (
+      <View style={styles.container}>
+        <MainHeader />
+        <FlatList
+          contentContainerStyle={styles.deckList}
+          data={decks}
+          renderItem={({ item }) => (
+            <DeckListItem
+              deck={item.key}
+              cardsNumber={store.getState().decks[item.key].questions.length}
+              navigation={navigation}
+            />
+          )}
         />
-      )}
-    />
-    <TouchableOpacity
-      style={styles.addBtn}
-      onPress={() => navigation.navigate('CreateDeck')}
-    >
-      <Feather name='plus-circle' size={50} color='green' />
-    </TouchableOpacity>
-  </View>
-);
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => navigation.navigate('CreateDeck')}
+        >
+          <Feather name='plus-circle' size={50} color='green' />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
