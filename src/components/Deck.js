@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 class Deck extends Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class Deck extends Component {
   })
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, cardsNumber, deck } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.subHeader}>
-          <Text>This deck contains {navigation.state.params.cardsNumber} cards</Text>
+          <Text>This deck contains {cardsNumber} cards</Text>
         </View>
         <View style={styles.body}>
           <View style={styles.btnContainer}>
@@ -30,7 +31,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => navigation.navigate('AddQuestion', {deck: navigation.state.params.deck})}
+              onPress={() => navigation.navigate('AddQuestion', {deck})}
             >
               <Text style={styles.btnText}>Add a card</Text>
             </TouchableOpacity>
@@ -83,4 +84,9 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Deck;
+const mapStateToProps = (state, ownProps) => ({
+  deck: ownProps.navigation.state.params.deck,
+  cardsNumber: state.decks[ownProps.navigation.state.params.deck].questions.length
+});
+
+export default connect(mapStateToProps)(Deck);
