@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import DeckList from './src/components/DeckList';
 import Deck from './src/components/Deck';
+import CreateDeck from './src/components/CreateDeck';
 import AddQuestion from './src/components/AddQuestion';
 import Quiz from './src/components/Quiz';
 import { Constants } from 'expo';
@@ -17,7 +18,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <CustomStatusBar />
-        <Quiz />
+        <CreateDeck />
       </View>
     );
   }
