@@ -9,16 +9,26 @@ class Back extends Component {
     };
   }
 
+  goToNext = () => {
+    const { navigation } = this.props;
+    const { current } = navigation.state.params;
+    const { questions } = this.props.screenProps;
+    if (current === questions.length - 1) return navigation.navigate('End');
+    return navigation.navigate('Front', {current: current + 1});
+  }
+
   render() {
     const { correct } = this.state;
+    const { questions } = this.props.screenProps;
+    const { current } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>1 of x</Text>
+          <Text style={styles.headerText}>{current + 1} of {questions.length}</Text>
         </View>
         <View style={styles.body}>
           <View style={styles.answerContainer}>
-            <Text style={styles.answer}>Answer.</Text>
+            <Text style={styles.answer}>{questions[current].answer}</Text>
           </View>
           <View style={styles.guess}>
             <Text>Switch on if correct</Text>
@@ -29,7 +39,7 @@ class Back extends Component {
           </View>
           <TouchableOpacity
             style={styles.nextBtn}
-            onPress={() => alert('Go to next question.')}
+            onPress={() => this.goToNext()}
           >
             <Text>Next</Text>
           </TouchableOpacity>

@@ -23,7 +23,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => navigation.navigate('Quiz')}
+              onPress={() => navigation.navigate('Quiz', {deck})}
             >
               <Text style={styles.btnText}>Start quiz</Text>
             </TouchableOpacity>

@@ -16,7 +16,7 @@ const CustomStatusBar = () => (
   </View>
 );
 
-const MainNavigator = StackNavigator({
+const MainNavigation = StackNavigator({
   Home: {
     screen: DeckList,
     navigationOptions: {
@@ -52,7 +52,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={styles.container}>
           <CustomStatusBar />
-          <MainNavigator />
+          <MainNavigation />
         </View>
       </Provider>
     );
