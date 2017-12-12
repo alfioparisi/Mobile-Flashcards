@@ -41,7 +41,7 @@ const MainNavigation = StackNavigator({
   Quiz: {
     screen: Quiz,
     navigationOptions: {
-      title: 'Quiz'
+      header: null
     }
   }
 });

@@ -21,8 +21,8 @@ const QuizNavigation = StackNavigator({
   }
 });
 
-const Quiz = ({ questions }) => (
-  <QuizNavigation screenProps={{questions}} />
+const Quiz = ({ questions, navigation }) => (
+  <QuizNavigation screenProps={{questions, rootNavigation: navigation}} />
 );
 
 const mapStateToProps = (state, ownProps) => ({

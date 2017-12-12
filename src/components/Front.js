@@ -1,9 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { resetScore } from '../actions/score';
+import { connect } from 'react-redux';
 
-const Front = ({ navigation, screenProps }) => {
-  const { questions } = screenProps;
+const stopQuiz = (rootNavigation, dispatch) => {
+  dispatch(resetScore());
+  return rootNavigation.goBack();
+};
+
+const Front = ({ navigation, screenProps, dispatch }) => {
+  const { questions, rootNavigation } = screenProps;
   const current = navigation.state.params ? navigation.state.params.current : 0;
   return (
     <View style={styles.container}>
@@ -20,7 +27,7 @@ const Front = ({ navigation, screenProps }) => {
       </View>
       <TouchableOpacity
         style={styles.undo}
-        onPress={() => alert('Stop quiz.')}
+        onPress={() => stopQuiz(rootNavigation, dispatch)}
       >
         <MaterialIcons name='cancel' size={50} />
       </TouchableOpacity>
@@ -66,4 +73,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Front;
+export default connect()(Front);

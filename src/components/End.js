@@ -1,8 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
 
-const End = ({ score }) => (
+const restart = (navigation, dispatch) => {
+  dispatch(resetScore());
+  return navigation.navigate('Front');
+};
+
+const goBack = (dispatch, { rootNavigation }) => {
+  dispatch(resetScore());
+  return rootNavigation.goBack();
+}
+
+const End = ({ navigation, score, dispatch, screenProps }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={styles.headerText}>Finish</Text>
@@ -15,13 +26,13 @@ const End = ({ score }) => (
       <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => alert('Restart.')}
+          onPress={() => restart(navigation, dispatch)}
         >
           <Text>Restart</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => alert('Go back to deck view.')}
+          onPress={() => goBack(dispatch, screenProps)}
         >
           <Text>Go back</Text>
         </TouchableOpacity>
