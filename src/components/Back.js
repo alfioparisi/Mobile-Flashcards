@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Switch, TouchableOpacity, StyleSheet } from 'react-native';
+import { increaseScore } from '../actions/score';
+import { connect } from 'react-redux';
 
 class Back extends Component {
   constructor(props) {
@@ -10,9 +12,13 @@ class Back extends Component {
   }
 
   goToNext = () => {
-    const { navigation } = this.props;
+    const { correct } = this.state;
+    const { navigation, dispatch } = this.props;
     const { current } = navigation.state.params;
     const { questions } = this.props.screenProps;
+    // If the answer is correct, increment the score.
+    if (correct) dispatch(increaseScore());
+
     if (current === questions.length - 1) return navigation.navigate('End');
     return navigation.navigate('Front', {current: current + 1});
   }
@@ -97,4 +103,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Back;
+const mapStateToProps = state => ({
+  score: state.score
+});
+
+export default connect(mapStateToProps)(Back);

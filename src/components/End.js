@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
-const End = () => (
+const End = ({ score }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={styles.headerText}>Finish</Text>
     </View>
     <View style={styles.body}>
       <View style={styles.percContainer}>
-        <Text>% completed</Text>
+        <Text>Got {score}</Text>
         <Text>bar here</Text>
       </View>
       <View style={styles.btnContainer}>
@@ -80,4 +81,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default End;
+const mapStateToProps = state => ({
+  score: state.score
+});
+
+export default connect(mapStateToProps)(End);
