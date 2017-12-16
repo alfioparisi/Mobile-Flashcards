@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
 import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
 
@@ -20,8 +21,8 @@ const End = ({ navigation, score, dispatch, screenProps }) => (
     </View>
     <View style={styles.body}>
       <View style={styles.percContainer}>
-        <Text>Got {score}</Text>
-        <Text>bar here</Text>
+        <Text>{score}%</Text>
+        <ProgressBar progess={0.4} color='black' animated={false} />
       </View>
       <View style={styles.btnContainer}>
         <TouchableOpacity
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  score: state.score
+const mapStateToProps = (state, ownProps) => ({
+  score: Math.round(state.score / ownProps.screenProps.questions.length * 100)
 });
 
 export default connect(mapStateToProps)(End);
