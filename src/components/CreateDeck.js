@@ -31,7 +31,11 @@ class CreateDeck extends Component {
     AsyncStorage.mergeItem('@mobileFlashCards', JSON.stringify(newDeck));
 
     // go back to deck view
-    navigation.dispatch(NavigationActions.back())
+    navigation.dispatch(NavigationActions.back());
+    navigation.navigate('Deck', {
+      entryId: deckName,
+      deck: deckName
+    });
   }
 
   checkAvailableName = () => {
