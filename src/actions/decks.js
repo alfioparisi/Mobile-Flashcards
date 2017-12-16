@@ -1,4 +1,9 @@
-import { CREATE_DECK, ADD_QUESTION } from './types';
+import { IMPORT_INITIAL_STATE, CREATE_DECK, ADD_QUESTION } from './types';
+
+export const importInitialState = initialState => ({
+  type: IMPORT_INITIAL_STATE,
+  initialState
+});
 
 export const createDeck = name => ({
   type: CREATE_DECK,

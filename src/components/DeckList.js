@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import MainHeader from './MainHeader';
 import DeckListItem from './DeckListItem';
 import { Feather } from '@expo/vector-icons';
@@ -11,22 +11,25 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks, navigation } = this.props;
+    const { decks, navigation, state } = this.props;
     const decksList = Object.keys(decks).map(item => ({key: item}));
     return (
       <View style={styles.container}>
         <MainHeader />
-        <FlatList
-          contentContainerStyle={styles.deckList}
-          data={decksList}
-          renderItem={({ item }) => (
-            <DeckListItem
-              deck={item.key}
-              cardsNumber={decks[item.key].questions.length}
-              navigation={navigation}
-            />
-          )}
-        />
+        <Text>{JSON.stringify(state)}</Text>
+        {decks && (
+          <FlatList
+            contentContainerStyle={styles.deckList}
+            data={decksList}
+            renderItem={({ item }) => (
+              <DeckListItem
+                deck={item.key}
+                cardsNumber={decks[item.key].questions.length}
+                navigation={navigation}
+              />
+            )}
+          />
+        )}
         <TouchableOpacity
           style={styles.addBtn}
           onPress={() => navigation.navigate('CreateDeck')}
@@ -60,7 +63,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  decks: state.decks
+  decks: state.decks,
+  state
 });
 
 export default connect(mapStateToProps)(DeckList);
