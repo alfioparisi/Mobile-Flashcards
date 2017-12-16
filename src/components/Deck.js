@@ -12,7 +12,7 @@ class Deck extends Component {
     title: navigation.state.params.deck
   })
 
-  startQuiz(cardsNumber, deck) {
+  startQuiz(navigation, cardsNumber, deck) {
     if (cardsNumber) return navigation.navigate('Quiz', {deck});
     return alert('This deck is empty.');
   }
@@ -28,7 +28,7 @@ class Deck extends Component {
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => this.startQuiz(cardsNumber, deck)}
+              onPress={() => this.startQuiz(navigation, cardsNumber, deck)}
             >
               <Text style={styles.btnText}>Start quiz</Text>
             </TouchableOpacity>

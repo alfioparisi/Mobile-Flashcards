@@ -17,19 +17,23 @@ class AddQuestion extends Component {
   addQuestion = () => {
     const { question, answer } = this.state;
     const { dispatch, navigation } = this.props;
+    const deck = navigation.state.params.deck;
     // Update Redux.
-    dispatch(addQuestion(navigation.state.params.deck, question, answer));
+    dispatch(addQuestion(deck, question, answer));
 
     // Update AsyncStorage.
     AsyncStorage.getItem('@mobileFlashCards')
     .then(jsonState => JSON.parse(jsonState))
-    .then(state => state.questions = [
-      ...state.questions,
-      {
-        question,
-        answer
-      }
-    ])
+    .then(state => {
+      state[deck].questions = [
+        ...state[deck].questions,
+        {
+          question,
+          answer
+        }
+      ]
+      AsyncStorage.setItem('@mobileFlashCards', JSON.stringify(state));
+    })
     .catch(err => console.error(err));
 
     // Navigate to `Deck`.
