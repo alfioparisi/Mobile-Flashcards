@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions, Alert } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions, Alert, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDeck } from '../actions/decks';
@@ -22,6 +22,13 @@ class CreateDeck extends Component {
     store.dispatch(createDeck(deckName));
 
     // save deck to AsyncStorage
+    const newDeck = {
+      [deckName]: {
+        title: deckName,
+        questions: []
+      }
+    };
+    AsyncStorage.mergeItem('@mobileFlashCards', JSON.stringify(newDeck));
 
     // go back to deck view
     navigation.dispatch(NavigationActions.back())

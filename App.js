@@ -49,7 +49,6 @@ const MainNavigation = StackNavigator({
 
 export default class App extends React.Component {
   componentDidMount() {
-    AsyncStorage.clear();
     const initialState = {
       React: {
         title: 'React',
