@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Animated } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 class Deck extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      opacity: new Animated.Value(0)
+    };
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -17,10 +20,16 @@ class Deck extends Component {
     return alert('This deck is empty.');
   }
 
+  componentDidMount() {
+    const { opacity } = this.state;
+    Animated.timing(opacity, {toValue: 1, duration: 1000}).start();
+  }
+
   render() {
+    const { opacity } = this.state;
     const { navigation, cardsNumber, deck } = this.props;
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, {opacity}]}>
         <View style={styles.subHeader}>
           <Text>This deck contains {cardsNumber} cards</Text>
         </View>
@@ -42,7 +51,7 @@ class Deck extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </Animated.View>
     );
   }
 }
