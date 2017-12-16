@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
 import { addQuestion } from '../actions/decks';
@@ -17,7 +17,22 @@ class AddQuestion extends Component {
   addQuestion = () => {
     const { question, answer } = this.state;
     const { dispatch, navigation } = this.props;
+    // Update Redux.
     dispatch(addQuestion(navigation.state.params.deck, question, answer));
+
+    // Update AsyncStorage.
+    AsyncStorage.getItem('@mobileFlashCards')
+    .then(jsonState => JSON.parse(jsonState))
+    .then(state => state.questions = [
+      ...state.questions,
+      {
+        question,
+        answer
+      }
+    ])
+    .catch(err => console.error(err));
+
+    // Navigate to `Deck`.
     navigation.dispatch(NavigationActions.back())
   }
 
