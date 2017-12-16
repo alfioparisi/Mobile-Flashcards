@@ -26,7 +26,7 @@ const deck = (state = {}, action) => {
 const decks = (state = {}, action) => {
   switch(action.type) {
     case IMPORT_INITIAL_STATE :
-      return action.initialState.decks;
+      return action.initialState;
     case CREATE_DECK :
       return {
         ...state,
