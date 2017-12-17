@@ -31,7 +31,7 @@ class DeckList extends Component {
           style={styles.addBtn}
           onPress={() => navigation.navigate('CreateDeck')}
         >
-          <Ionicons name='md-add-circle' size={50} color='green' />
+          <Ionicons name='md-add-circle' size={55} color='#f83926' />
         </TouchableOpacity>
       </View>
     );
