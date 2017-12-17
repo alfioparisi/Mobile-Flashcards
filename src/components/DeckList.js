@@ -40,15 +40,10 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    borderStyle: 'solid',
-    borderColor: 'blue',
-    borderWidth: 3
+    flex: 1
   },
   deckList: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3
+    backgroundColor: '#ebeaea'
   },
   addBtn: {
     position: 'absolute',

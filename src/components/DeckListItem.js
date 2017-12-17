@@ -20,17 +20,17 @@ const DeckListItem = ({ deck, cardsNumber, navigation }) => (
 
 const styles = StyleSheet.create({
   listItem: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
+    backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: 70
+    height: 100,
+    marginTop: 10
   },
   itemText: {
     flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#f71308'
   }
 });
 
