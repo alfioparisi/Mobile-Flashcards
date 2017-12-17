@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
+import { View, FlatList, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
 import DeckListItem from './DeckListItem';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
+/**
+  Render the list of all available decks and the button to create a new deck.
+  @param {object} : decks
+*/
 class DeckList extends Component {
   constructor(props) {
     super(props);

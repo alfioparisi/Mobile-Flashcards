@@ -6,6 +6,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDeck } from '../actions/decks';
 import { connect } from 'react-redux';
 
+/**
+  Render the form to create a new deck.
+  @param {object} : decks
+  @param {object} : navigation object
+*/
 class CreateDeck extends Component {
   constructor(props) {
     super(props);
@@ -14,13 +19,16 @@ class CreateDeck extends Component {
     };
   }
 
+  /**
+    Add a new deck to both Redux and AsyncStorage, then navigate to its View.
+  */
   createDeck = () => {
     const { deckName } = this.state;
     const { navigation, dispatch } = this.props;
-    // dispatch action
+    // Dispatch action to create the deck.
     dispatch(createDeck(deckName));
 
-    // save deck to AsyncStorage
+    // Save deck to AsyncStorage.
     const newDeck = {
       [deckName]: {
         title: deckName,
@@ -29,7 +37,7 @@ class CreateDeck extends Component {
     };
     AsyncStorage.mergeItem('@mobileFlashCards', JSON.stringify(newDeck));
 
-    // go back to deck view
+    // Go to deck view.
     navigation.dispatch(NavigationActions.back());
     navigation.navigate('Deck', {
       entryId: deckName,
@@ -37,10 +45,15 @@ class CreateDeck extends Component {
     });
   }
 
+  /**
+    Check whether the given name for the deck is available or not.
+  */
   checkAvailableName = () => {
     const { deckName } = this.state;
     const { decks } = this.props;
-    if (!deckName) return alert('A deck needs a name to be created correctly.')
+    // If no name is provided notify the user.
+    if (!deckName) return alert('A deck needs a name to be created correctly.');
+    // If the name already exist ask to replace the old deck with a new empty one.
     if (decks[deckName]) {
       Alert.alert(
         'Warning',

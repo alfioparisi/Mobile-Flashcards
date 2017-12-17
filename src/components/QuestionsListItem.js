@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+/**
+  Render a question as item of the modal list.
+  @param {string} : question
+*/
 const QuestionsListItem = ({ question }) => (
   <View
     style={styles.listItem}

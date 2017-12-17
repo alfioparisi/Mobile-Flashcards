@@ -5,17 +5,28 @@ import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
 import { clearLocalNotification, setLocalNotification } from '../../utils/helpers';
 
+/**
+  Final view of the quiz showing the score, a button to restart the quiz and one
+  to go back to the deck view.
+  @param {number} : score in %
+*/
 class End extends Component {
   componentDidMount() {
     clearLocalNotification()
     .then(setLocalNotification);
   }
 
+  /**
+    Reset the score and restart the quiz.
+  */
   restart = (navigation, dispatch) => {
     dispatch(resetScore());
     return navigation.navigate('Front');
   }
 
+  /**
+    Reset the score and go back to the deck view using the main navigation.
+  */
   goBack = (dispatch, { rootNavigation }) => {
     dispatch(resetScore());
     return rootNavigation.goBack();

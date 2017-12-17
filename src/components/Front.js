@@ -4,11 +4,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
 
+/**
+  When the quiz is stopped, reset the score and go back to the deck view using
+  the main navigation.
+*/
 const stopQuiz = (rootNavigation, dispatch) => {
   dispatch(resetScore());
   return rootNavigation.goBack();
 };
 
+/**
+  Render the questions for the quiz. Also render a button to stop the quiz.
+  @param {object} : navigation object
+  @param {object} : custom props passed through `StackNavigator`
+*/
 const Front = ({ navigation, screenProps, dispatch }) => {
   const { questions, rootNavigation } = screenProps;
   const current = navigation.state.params ? navigation.state.params.current : 0;

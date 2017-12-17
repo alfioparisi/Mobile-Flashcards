@@ -3,6 +3,10 @@ import { View, Text, Switch, TouchableOpacity, StyleSheet } from 'react-native';
 import { increaseScore } from '../actions/score';
 import { connect } from 'react-redux';
 
+/**
+  Render the answers and a switch to mark the guess as correct.
+  @param {number} : current score
+*/
 class Back extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +15,10 @@ class Back extends Component {
     };
   }
 
+  /**
+    Go to the next question and increment the score if the answer is correct.
+    If this was the last answer, show the final view of the quiz.
+  */
   goToNext = () => {
     const { correct } = this.state;
     const { navigation, dispatch } = this.props;

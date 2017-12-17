@@ -6,6 +6,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { addQuestion } from '../actions/decks';
 import { connect } from 'react-redux';
 
+/**
+  Render the form to add a new question to a deck.
+*/
 class AddQuestion extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +18,15 @@ class AddQuestion extends Component {
     };
   }
 
+  /**
+    Add the question to Redux and AsyncStorage, then navigate back to the deck view.
+  */
   addQuestion = () => {
     const { question, answer } = this.state;
     const { dispatch, navigation } = this.props;
     const deck = navigation.state.params.deck;
-    if (!question || !answer) return alert('You need to provide both question and answer.')
+    // If either the question or the answer is not provided, notify the user.
+    if (!question || !answer) return alert('You need to provide both question and answer.');
     // Update Redux.
     dispatch(addQuestion(deck, question, answer));
 

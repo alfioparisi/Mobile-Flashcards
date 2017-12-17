@@ -49,6 +49,10 @@ const MainNavigation = StackNavigator({
 });
 
 export default class App extends React.Component {
+  /**
+    Populate Redux state by fetching data from AsyncStorage.
+    Set Notifications using helper function.
+  */
   componentDidMount() {
     // Fetch data from Storage.
     const initialState = {

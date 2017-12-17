@@ -5,6 +5,15 @@ import QuestionsListItem from './QuestionsListItem';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
+/**
+  Render a deck. Each deck has a button to start the quiz and one to add a new
+  card. Also there is a button to show a list of all available questions for the
+  deck within a modal.
+  @param {string} : deck name
+  @param {number} : number of cards of this deck
+  @param {array} : questions for this deck
+  @param {object} : navigation object passed by `StackNavigator`
+*/
 class Deck extends Component {
   constructor(props) {
     super(props);

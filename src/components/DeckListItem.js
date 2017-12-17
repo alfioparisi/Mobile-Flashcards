@@ -1,6 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+/**
+  When the list item is clicked navigate to the View representing this deck.
+  @param {object} : navigation object passed by `StackNavigator`
+  @param {string} : name of the deck
+*/
 const openDeck = (navigation, deck) => {
   return navigation.navigate('Deck', {
     entryId: deck,
@@ -8,6 +13,12 @@ const openDeck = (navigation, deck) => {
   });
 };
 
+/**
+  Render the single list item of the decks list.
+  @param {string} : name of the deck corresponding to this list item
+  @param {number} : number of cards of the deck
+  @param {object} : navigation object passed by `StackNavigator`
+*/
 const DeckListItem = ({ deck, cardsNumber, navigation }) => (
   <TouchableOpacity
     style={styles.listItem}
@@ -28,7 +39,6 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   itemText: {
-    flex: 1,
     textAlign: 'center',
     color: '#f71308'
   }
