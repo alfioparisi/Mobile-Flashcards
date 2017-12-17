@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity, StyleSheet, Dimensions, Alert, AsyncStorage } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, Alert, AsyncStorage } from 'react-native';
+import Button from './Button';
 import { NavigationActions } from 'react-navigation';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDeck } from '../actions/decks';
@@ -74,12 +75,10 @@ class CreateDeck extends Component {
           </View>
         </View>
         <View style={styles.btnContainer}>
-          <TouchableOpacity
-            style={styles.btn}
+          <Button
             onPress={() => this.checkAvailableName()}
-          >
-            <Text style={styles.btnText}>Create</Text>
-          </TouchableOpacity>
+            text='Create'
+          />
         </View>
       </KeyboardAvoidingView>
     );
@@ -111,21 +110,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomColor: '#f65f57',
     borderBottomWidth: 1
-  },
-  btn: {
-    borderStyle: 'solid',
-    borderColor: '#c6c0bf',
-    borderWidth: 3,
-    borderRadius: 20,
-    backgroundColor: '#f83926',
-    width: Dimensions.get('window').width / 1.7,
-    height: Dimensions.get('window').height / 5,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  btnText: {
-    fontSize: 18,
-    color: '#fff'
   }
 });
 

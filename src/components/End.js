@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import Button from './Button';
 import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
 import { clearLocalNotification, setLocalNotification } from '../../utils/helpers';
@@ -35,18 +36,14 @@ class End extends Component {
             <Text>of the questions</Text>
           </View>
           <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.btn}
+            <Button
               onPress={() => this.restart(navigation, dispatch)}
-            >
-              <Text style={styles.btnText}>Restart</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btn}
+              text='Restart'
+            />
+            <Button
               onPress={() => this.goBack(dispatch, screenProps)}
-            >
-              <Text style={styles.btnText}>Go back</Text>
-            </TouchableOpacity>
+              text='Go back'
+            />
           </View>
         </View>
       </View>
@@ -80,29 +77,10 @@ const styles = StyleSheet.create({
     color: '#f83926'
   },
   btnContainer: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 0.8,
+    justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#ebeaea',
-    borderStyle: 'solid',
-    borderBottomColor: '#f65f57',
-    borderBottomWidth: 1
-  },
-  btn: {
-    borderStyle: 'solid',
-    borderColor: '#c6c0bf',
-    borderWidth: 3,
-    borderRadius: 20,
-    backgroundColor: '#f83926',
-    width: Dimensions.get('window').width / 1.7,
-    height: Dimensions.get('window').height / 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10
-  },
-  btnText: {
-    fontSize: 18,
-    color: '#fff'
+    backgroundColor: '#ebeaea'
   }
 });
 

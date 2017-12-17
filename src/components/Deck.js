@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
+import Button from './Button';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
@@ -35,20 +36,16 @@ class Deck extends Component {
         </View>
         <View style={styles.body}>
           <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.btn}
+            <Button
               onPress={() => this.startQuiz(navigation, cardsNumber, deck)}
-            >
-              <Text style={styles.btnText}>Start quiz</Text>
-            </TouchableOpacity>
+              text='Start quiz'
+            />
           </View>
           <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={styles.btn}
+            <Button
               onPress={() => navigation.navigate('AddQuestion', {deck})}
-            >
-              <Text style={styles.btnText}>Add a card</Text>
-            </TouchableOpacity>
+              text='Add a card'
+            />
           </View>
         </View>
       </Animated.View>
@@ -84,21 +81,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomColor: '#f65f57',
     borderBottomWidth: 1
-  },
-  btn: {
-    borderStyle: 'solid',
-    borderColor: '#c6c0bf',
-    borderWidth: 3,
-    borderRadius: 20,
-    backgroundColor: '#f83926',
-    width: Dimensions.get('window').width / 1.7,
-    height: Dimensions.get('window').height / 5,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  btnText: {
-    fontSize: 18,
-    color: '#fff'
   }
 });
 
