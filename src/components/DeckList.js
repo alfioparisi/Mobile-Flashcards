@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
+import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import MainHeader from './MainHeader';
 import DeckListItem from './DeckListItem';
 import { Feather } from '@expo/vector-icons';
@@ -11,12 +11,11 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks, navigation, state } = this.props;
+    const { decks, navigation } = this.props;
     const decksList = Object.keys(decks).map(item => ({key: item}));
     return (
       <View style={styles.container}>
         <MainHeader />
-        <Text>{JSON.stringify(state)}</Text>
         {decks && (
           <FlatList
             contentContainerStyle={styles.deckList}
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
     borderWidth: 3
   },
   deckList: {
-    flex: 1,
     borderStyle: 'solid',
     borderColor: 'red',
     borderWidth: 3
@@ -63,8 +61,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  decks: state.decks,
-  state
+  decks: state.decks
 });
 
 export default connect(mapStateToProps)(DeckList);
