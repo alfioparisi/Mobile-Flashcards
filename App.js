@@ -10,6 +10,7 @@ import { Constants } from 'expo';
 import { Provider } from 'react-redux';
 import store from './src/store';
 import { importInitialState } from './src/actions/decks';
+import { setLocalNotification } from './utils/helpers';
 
 const CustomStatusBar = () => (
   <View style={styles.statusBar}>
@@ -49,6 +50,7 @@ const MainNavigation = StackNavigator({
 
 export default class App extends React.Component {
   componentDidMount() {
+    // Fetch data from Storage.
     const initialState = {
       React: {
         title: 'React',
@@ -83,6 +85,8 @@ export default class App extends React.Component {
       console.error(err);
       return store.dispatch(importInitialState(initialState));
     });
+    // Set notifications.
+    setLocalNotification();
   }
 
   render() {

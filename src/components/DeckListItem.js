@@ -18,7 +18,6 @@ const DeckListItem = ({ deck, cardsNumber, navigation }) => (
   </TouchableOpacity>
 );
 
-// TODO: make list items take all available space.
 const styles = StyleSheet.create({
   listItem: {
     borderStyle: 'solid',

@@ -1,46 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import ProgressBar from 'react-native-progress/Bar';
 import { resetScore } from '../actions/score';
 import { connect } from 'react-redux';
+import { clearLocalNotification, setLocalNotification } from '../../utils/helpers';
 
-const restart = (navigation, dispatch) => {
-  dispatch(resetScore());
-  return navigation.navigate('Front');
-};
+class End extends Component {
+  componentDidMount() {
+    clearLocalNotification()
+    .then(setLocalNotification);
+  }
 
-const goBack = (dispatch, { rootNavigation }) => {
-  dispatch(resetScore());
-  return rootNavigation.goBack();
+  restart = (navigation, dispatch) => {
+    dispatch(resetScore());
+    return navigation.navigate('Front');
+  }
+
+  goBack = (dispatch, { rootNavigation }) => {
+    dispatch(resetScore());
+    return rootNavigation.goBack();
+  }
+
+  render() {
+    const { navigation, score, dispatch, screenProps } = this.props;
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Finish</Text>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.percContainer}>
+            <Text>{score}%</Text>
+          </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => this.restart(navigation, dispatch)}
+            >
+              <Text>Restart</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => this.goBack(dispatch, screenProps)}
+            >
+              <Text>Go back</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
 }
-
-const End = ({ navigation, score, dispatch, screenProps }) => (
-  <View style={styles.container}>
-    <View style={styles.header}>
-      <Text style={styles.headerText}>Finish</Text>
-    </View>
-    <View style={styles.body}>
-      <View style={styles.percContainer}>
-        <Text>{score}%</Text>
-        <ProgressBar progess={0.4} color='black' animated={false} />
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => restart(navigation, dispatch)}
-        >
-          <Text>Restart</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => goBack(dispatch, screenProps)}
-        >
-          <Text>Go back</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {
