@@ -5,21 +5,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDeck } from '../actions/decks';
 import { connect } from 'react-redux';
 
-import store from '../store';
-
 class CreateDeck extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckName: 'Zabaglione'
+      deckName: ''
     };
   }
 
   createDeck = () => {
     const { deckName } = this.state;
-    const { navigation } = this.props;
+    const { navigation, dispatch } = this.props;
     // dispatch action
-    store.dispatch(createDeck(deckName));
+    dispatch(createDeck(deckName));
 
     // save deck to AsyncStorage
     const newDeck = {
@@ -41,6 +39,7 @@ class CreateDeck extends Component {
   checkAvailableName = () => {
     const { deckName } = this.state;
     const { decks } = this.props;
+    if (!deckName) return alert('A deck needs a name to be created correctly.')
     if (decks[deckName]) {
       Alert.alert(
         'Warning',
@@ -64,11 +63,13 @@ class CreateDeck extends Component {
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
         <View style={styles.body}>
           <View style={styles.label}>
-            <Text>Choose a name</Text>
+            <Text>Type the name for your new deck</Text>
             <TextInput
               style={styles.textInput}
               value={deckName}
               onChangeText={text => this.setState({deckName: text})}
+              placeholder='Zabaglione'
+              placeholderTextColor='#f65f57'
             />
           </View>
         </View>
@@ -87,15 +88,10 @@ class CreateDeck extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ebeaea'
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'orange',
-    borderWidth: 3,
     flex: 2
   },
   label: {
@@ -105,27 +101,31 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 16,
-    padding: 5
+    padding: 12
   },
   btnContainer: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ebeaea',
+    borderStyle: 'solid',
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 1
   },
   btn: {
     borderStyle: 'solid',
-    borderColor: 'blue',
+    borderColor: '#c6c0bf',
     borderWidth: 3,
-    width: Dimensions.get('window').width / 2,
-    height: Dimensions.get('window').height / 4,
+    borderRadius: 20,
+    backgroundColor: '#f83926',
+    width: Dimensions.get('window').width / 1.7,
+    height: Dimensions.get('window').height / 5,
     justifyContent: 'center',
     alignItems: 'center'
   },
   btnText: {
-    fontSize: 18
+    fontSize: 18,
+    color: '#fff'
   }
 });
 
