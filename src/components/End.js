@@ -29,20 +29,23 @@ class End extends Component {
         </View>
         <View style={styles.body}>
           <View style={styles.percContainer}>
-            <Text>{score}%</Text>
+            <Text>Congratulations.</Text>
+            <Text>You completed</Text>
+            <Text style={styles.percText}>{score}%</Text>
+            <Text>of the questions</Text>
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity
               style={styles.btn}
               onPress={() => this.restart(navigation, dispatch)}
             >
-              <Text>Restart</Text>
+              <Text style={styles.btnText}>Restart</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
               onPress={() => this.goBack(dispatch, screenProps)}
             >
-              <Text>Go back</Text>
+              <Text style={styles.btnText}>Go back</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -53,52 +56,53 @@ class End extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1
   },
   header: {
+    alignItems: 'center',
     borderStyle: 'solid',
-    borderColor: 'blue',
-    borderWidth: 3,
-    alignItems: 'center'
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 1
   },
   headerText: {
     fontSize: 20,
     padding: 10
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'green',
-    borderWidth: 3,
     flex: 1
   },
   percContainer: {
-    borderStyle: 'solid',
-    borderColor: 'orange',
-    borderWidth: 3,
-    flex: 1,
-    flexDirection: 'row',
+    flex: 0.5,
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+  percText: {
+    color: '#f83926'
+  },
   btnContainer: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ebeaea',
+    borderStyle: 'solid',
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 1
   },
   btn: {
     borderStyle: 'solid',
-    borderColor: 'blue',
+    borderColor: '#c6c0bf',
     borderWidth: 3,
-    width: Dimensions.get('window').width / 2,
-    height: Dimensions.get('window').height / 4,
+    borderRadius: 20,
+    backgroundColor: '#f83926',
+    width: Dimensions.get('window').width / 1.7,
+    height: Dimensions.get('window').height / 5,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  btnText: {
+    fontSize: 18,
+    color: '#fff'
   }
 });
 

@@ -29,7 +29,7 @@ const Front = ({ navigation, screenProps, dispatch }) => {
         style={styles.undo}
         onPress={() => stopQuiz(rootNavigation, dispatch)}
       >
-        <MaterialIcons name='cancel' size={50} />
+        <MaterialIcons name='cancel' size={55} color='#c6c0bf' />
       </TouchableOpacity>
     </View>
   );
@@ -37,22 +37,18 @@ const Front = ({ navigation, screenProps, dispatch }) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1,
     justifyContent: 'center'
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'blue',
-    borderWidth: 3,
     flex: 1
   },
   questionContainer: {
     borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
+    borderBottomColor: '#c6c0bf',
+    borderBottomWidth: 1,
+    paddingLeft: 15,
+    paddingLeft: 5,
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
@@ -62,9 +58,13 @@ const styles = StyleSheet.create({
   },
   showAnswer: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 12
   },
-  btnText: {},
+  btnText: {
+    fontSize: 17,
+    color: '#f65f57'
+  },
   undo: {
     position: 'absolute',
     bottom: 50,

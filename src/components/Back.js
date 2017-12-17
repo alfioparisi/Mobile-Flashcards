@@ -41,13 +41,15 @@ class Back extends Component {
             <Switch
               value={correct}
               onValueChange={correct => this.setState({correct})}
+              thumbTintColor='#f71308'
+              onTintColor='#f83926'
             />
           </View>
           <TouchableOpacity
             style={styles.nextBtn}
             onPress={() => this.goToNext()}
           >
-            <Text>Next</Text>
+            <Text style={styles.btnText}>Next</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -57,30 +59,30 @@ class Back extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1,
     justifyContent: 'center'
   },
   header: {
     alignItems: 'flex-end',
     paddingRight: 12,
-    marginTop: 10
+    marginTop: 10,
+    justifyContent: 'flex-end',
+    borderStyle: 'solid',
+    borderBottomColor: '#f71308',
+    borderBottomWidth: 0.7
   },
   headerText: {
     fontSize: 16
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'blue',
-    borderWidth: 3,
     flex: 1
   },
   answerContainer: {
     borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
+    borderBottomColor: '#c6c0bf',
+    borderBottomWidth: 1,
+    paddingLeft: 15,
+    paddingRight: 5,
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
@@ -89,9 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   guess: {
-    borderStyle: 'solid',
-    borderColor: 'green',
-    borderWidth: 3,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -99,8 +98,13 @@ const styles = StyleSheet.create({
   },
   nextBtn: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 12
   },
+  btnText: {
+    fontSize: 17,
+    color: '#f65f57'
+  }
 });
 
 const mapStateToProps = state => ({
