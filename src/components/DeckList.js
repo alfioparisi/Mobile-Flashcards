@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
-import MainHeader from './MainHeader';
 import DeckListItem from './DeckListItem';
-import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 class DeckList extends Component {
@@ -15,7 +14,6 @@ class DeckList extends Component {
     const decksList = Object.keys(decks).map(item => ({key: item}));
     return (
       <View style={styles.container}>
-        <MainHeader />
         {decks && (
           <FlatList
             contentContainerStyle={styles.deckList}
@@ -33,7 +31,7 @@ class DeckList extends Component {
           style={styles.addBtn}
           onPress={() => navigation.navigate('CreateDeck')}
         >
-          <Feather name='plus-circle' size={50} color='green' />
+          <Ionicons name='md-add-circle' size={50} color='green' />
         </TouchableOpacity>
       </View>
     );

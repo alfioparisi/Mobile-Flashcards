@@ -31,7 +31,7 @@ class Deck extends Component {
     return (
       <Animated.View style={[styles.container, {opacity}]}>
         <View style={styles.subHeader}>
-          <Text>This deck contains {cardsNumber} cards</Text>
+          <Text style={styles.headerText}>This deck contains {cardsNumber} cards</Text>
         </View>
         <View style={styles.body}>
           <View style={styles.btnContainer}>
@@ -58,43 +58,47 @@ class Deck extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1
   },
   subHeader: {
     borderStyle: 'solid',
-    borderColor: 'orange',
-    borderWidth: 3,
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 3,
+    backgroundColor: '#f71308',
     alignItems: 'flex-end',
-    paddingRight: 12
+    justifyContent: 'center',
+    paddingRight: 12,
+    height: 50,
+  },
+  headerText: {
+    color: '#ebeaea'
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'green',
-    borderWidth: 3,
     flex: 1
   },
   btnContainer: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ebeaea',
+    borderStyle: 'solid',
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 1
   },
   btn: {
     borderStyle: 'solid',
-    borderColor: 'blue',
+    borderColor: '#c6c0bf',
     borderWidth: 3,
-    width: Dimensions.get('window').width / 2,
-    height: Dimensions.get('window').height / 4,
+    borderRadius: 20,
+    backgroundColor: '#f83926',
+    width: Dimensions.get('window').width / 1.7,
+    height: Dimensions.get('window').height / 5,
     justifyContent: 'center',
     alignItems: 'center'
   },
   btnText: {
-    fontSize: 18
+    fontSize: 18,
+    color: '#fff'
   }
 });
 

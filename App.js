@@ -22,7 +22,7 @@ const MainNavigation = StackNavigator({
   Home: {
     screen: DeckList,
     navigationOptions: {
-      title: 'Home'
+      title: 'Mobile Flash Cards'
     }
   },
   Deck: {
