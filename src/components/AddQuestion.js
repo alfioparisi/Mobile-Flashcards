@@ -9,8 +9,8 @@ class AddQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: 'Mh?',
-      answer: 'Ah!'
+      question: '',
+      answer: ''
     };
   }
 
@@ -18,6 +18,7 @@ class AddQuestion extends Component {
     const { question, answer } = this.state;
     const { dispatch, navigation } = this.props;
     const deck = navigation.state.params.deck;
+    if (!question || !answer) return alert('You need to provide both question and answer.')
     // Update Redux.
     dispatch(addQuestion(deck, question, answer));
 
@@ -51,6 +52,8 @@ class AddQuestion extends Component {
               style={styles.textInput}
               value={question}
               onChangeText={text => this.setState({question: text})}
+              placeholder='Mh?'
+              placeholderTextColor='#f65f57'
             />
           </View>
           <View style={styles.label}>
@@ -59,6 +62,8 @@ class AddQuestion extends Component {
               style={styles.textInput}
               value={answer}
               onChangeText={text => this.setState({answer: text})}
+              placeholder='Ah!'
+              placeholderTextColor='#f65f57'
             />
           </View>
         </View>
@@ -77,15 +82,10 @@ class AddQuestion extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ebeaea'
   },
   body: {
-    borderStyle: 'solid',
-    borderColor: 'orange',
-    borderWidth: 3,
     flex: 2
   },
   label: {
@@ -95,27 +95,31 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 16,
-    padding: 5
+    padding: 12
   },
   btnContainer: {
-    borderStyle: 'solid',
-    borderColor: 'red',
-    borderWidth: 3,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ebeaea',
+    borderStyle: 'solid',
+    borderBottomColor: '#f65f57',
+    borderBottomWidth: 1
   },
   btn: {
     borderStyle: 'solid',
-    borderColor: 'blue',
+    borderColor: '#c6c0bf',
     borderWidth: 3,
-    width: Dimensions.get('window').width / 2,
-    height: Dimensions.get('window').height / 4,
+    borderRadius: 20,
+    backgroundColor: '#f83926',
+    width: Dimensions.get('window').width / 1.7,
+    height: Dimensions.get('window').height / 5,
     justifyContent: 'center',
     alignItems: 'center'
   },
   btnText: {
-    fontSize: 18
+    fontSize: 18,
+    color: '#fff'
   }
 });
 
