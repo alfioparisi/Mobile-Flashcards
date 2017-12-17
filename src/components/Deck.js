@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, FlatList, StyleSheet, Animated } from 'react-native';
 import Button from './Button';
-import { MaterialIcons } from '@expo/vector-icons';
+import QuestionsListItem from './QuestionsListItem';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 class Deck extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      opacity: new Animated.Value(0)
+      opacity: new Animated.Value(0),
+      showModal: false
     };
   }
 
@@ -27,12 +29,17 @@ class Deck extends Component {
   }
 
   render() {
-    const { opacity } = this.state;
-    const { navigation, cardsNumber, deck } = this.props;
+    const { opacity, showModal } = this.state;
+    const { navigation, cardsNumber, deck, questions } = this.props;
     return (
       <Animated.View style={[styles.container, {opacity}]}>
         <View style={styles.subHeader}>
           <Text style={styles.headerText}>This deck contains {cardsNumber} cards</Text>
+          <TouchableOpacity
+            onPress={() => this.setState({showModal: true})}
+          >
+            <MaterialCommunityIcons name='cards' size={30} color='#ebeaea' />
+          </TouchableOpacity>
         </View>
         <View style={styles.body}>
           <View style={styles.btnContainer}>
@@ -48,6 +55,28 @@ class Deck extends Component {
             />
           </View>
         </View>
+        <Modal
+          visible={showModal}
+          onRequestClose={() => this.setState({showModal: false})}
+          animationType='slide'
+        >
+          <View
+            style={styles.modalHeader}
+          >
+            <Text style={styles.modalHeaderText}>{deck} questions</Text>
+          </View>
+          {questions && (
+            <FlatList
+              style={styles.list}
+              data={questions}
+              renderItem={({ item }) => (
+                <QuestionsListItem
+                  question={item.key}
+                />
+              )}
+            />
+          )}
+        </Modal>
       </Animated.View>
     );
   }
@@ -62,9 +91,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f65f57',
     borderBottomWidth: 3,
     backgroundColor: '#f71308',
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    paddingRight: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 5,
+    paddingRight: 15,
     height: 50,
   },
   headerText: {
@@ -81,12 +112,24 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomColor: '#f65f57',
     borderBottomWidth: 1
+  },
+  modalHeader: {
+    flex: 0.2,
+    justifyContent: 'center'
+  },
+  modalHeaderText: {
+    fontSize: 18,
+    paddingLeft: 15
+  },
+  list: {
+    backgroundColor: '#ebeaea'
   }
 });
 
 const mapStateToProps = (state, ownProps) => ({
   deck: ownProps.navigation.state.params.deck,
-  cardsNumber: state.decks[ownProps.navigation.state.params.deck].questions.length
+  cardsNumber: state.decks[ownProps.navigation.state.params.deck].questions.length,
+  questions: state.decks[ownProps.navigation.state.params.deck].questions.map(obj => ({key: obj.question}))
 });
 
 export default connect(mapStateToProps)(Deck);
